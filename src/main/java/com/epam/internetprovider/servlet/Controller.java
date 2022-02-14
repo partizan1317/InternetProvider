@@ -1,4 +1,46 @@
 package com.epam.internetprovider.servlet;
 
-public class Controller {
+import com.epam.internetprovider.command.Command;
+import com.epam.internetprovider.command.CommandFactory;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class Controller extends HttpServlet {
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        process(request, response);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        process(request, response);
+    }
+
+    private void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String command = request.getParameter("command");
+        Command action = CommandFactory.create(command);
+        try {
+            CommandResult result = action.execute(request, response);
+            dispatch(request, response, result);
+        } catch (Exception e) {
+            request.setAttribute("errorMessage", e.getMessage());
+            dispatch(request, response, CommandResult.forward("/error.jsp"));
+        }
+    }
+
+    private void dispatch(HttpServletRequest request, HttpServletResponse response, CommandResult result) throws ServletException, IOException {
+        String page = result.getPage();
+        if (!result.isRedirect()) {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+            dispatcher.forward(request, response);
+        } else {
+            response.sendRedirect(page);
+        }
+    }
 }
