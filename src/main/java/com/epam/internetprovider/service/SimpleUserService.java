@@ -1,6 +1,6 @@
 package com.epam.internetprovider.service;
 
-import com.epam.internetprovider.dao.UserDao;
+import com.epam.internetprovider.dao.SimpleUserDao;
 import com.epam.internetprovider.entity.User;
 import com.epam.internetprovider.exception.DaoException;
 import com.epam.internetprovider.exception.ServiceException;
@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public class SimpleUserService implements UserService {
 
-    private UserDao dao;
+    private final SimpleUserDao dao;
 
-    public SimpleUserService(UserDao dao) {
+    public SimpleUserService(SimpleUserDao dao) {
         this.dao = dao;
     }
 

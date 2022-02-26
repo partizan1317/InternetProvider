@@ -1,6 +1,6 @@
 package com.epam.internetprovider.dao;
 
-import com.epam.internetprovider.entity.Identifable;
+import com.epam.internetprovider.entity.Identifiable;
 import com.epam.internetprovider.exception.DaoException;
 import com.epam.internetprovider.mapper.RowMapper;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractDao <T extends Identifable> implements Dao<T>{
+public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
 
     private final Connection connection;
 

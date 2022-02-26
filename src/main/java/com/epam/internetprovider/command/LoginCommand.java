@@ -10,7 +10,10 @@ import java.util.Optional;
 
 public class LoginCommand implements Command {
 
-    private SimpleUserService service;
+    private static final String PARAM_NAME_LOGIN = "login";
+    private static final String PARAM_NAME_PASSWORD = "password";
+
+    private final SimpleUserService service;
 
     public LoginCommand(SimpleUserService service) {
         this.service = service;
@@ -18,16 +21,17 @@ public class LoginCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
+        String login = request.getParameter(PARAM_NAME_LOGIN);
+        String password = request.getParameter(PARAM_NAME_PASSWORD);
         Optional<User> user = service.login(login, password);
         CommandResult result;
         if (user.isPresent()) {
             request.getSession().setAttribute("user", user.get());
-            result = CommandResult.redirect("controller?command=mainPage");
+            request.getSession().setAttribute("isLoggedIn", true);
+            result = CommandResult.forward("/main-user-page.jsp");
         } else {
             request.setAttribute("errorMessage", "Invalid login or password");
-            result = CommandResult.forward("/index.jsp");
+            result = CommandResult.forward("/login-page.jsp");
         }
         return result;
     }

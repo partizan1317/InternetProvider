@@ -1,8 +1,10 @@
 package com.epam.internetprovider.dao;
 
+import com.epam.internetprovider.connection.ConnectorDatabase;
 import com.epam.internetprovider.entity.User;
 import com.epam.internetprovider.exception.DaoException;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.Optional;
 
@@ -10,10 +12,10 @@ public class SimpleUserDao implements UserDao {
 
     public Optional<User> findUserByLoginAndPassword(final String login, final String password) throws DaoException {
         try {
-            Class.forName("org.h2.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:h2:tcp://localhost:9092/~/users","sa","");
+            ConnectorDatabase connectorDatabase = new ConnectorDatabase();
+            Connection connection = connectorDatabase.getConnection();
             try (PreparedStatement statement = connection.prepareStatement("SELECT ID, LOGIN FROM USER WHERE" +
-                    "LOGIN = ? AND PASSWORD = HASH('SHA256', STRINGTOUTF8(?),1000)")) {
+                    " LOGIN = ? AND PASSWORD = ?")) {
                 statement.setString(1, login);
                 statement.setString(2, password);
                 try (ResultSet resultSet = statement.executeQuery()) {
@@ -23,10 +25,8 @@ public class SimpleUserDao implements UserDao {
                 }
             }
             return Optional.empty();
-            } catch (SQLException | ClassNotFoundException e) {
+            } catch (SQLException | ClassNotFoundException | IOException e) {
                 throw new DaoException(e);
             }
         }
     }
-
-}

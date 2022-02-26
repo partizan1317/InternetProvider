@@ -6,21 +6,29 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
 
-    private Queue<ProxyConnection> availableConnections;
-    private Queue<ProxyConnection> connectionsInUse;
+    private final Queue<ProxyConnection> availableConnections;
+    private final Queue<ProxyConnection> connectionsInUse;
+    
+    private volatile static ConnectionPool connectionPool;
 
-    private ReentrantLock connectionsLock = new ReentrantLock();
+    private final ReentrantLock connectionsLock = new ReentrantLock();
 
-    private ConnectionFactory connectionFactory = new ConnectionFactory();
+    private final ConnectionFactory connectionFactory = new ConnectionFactory();
 
     private ConnectionPool() {
-        availableConnections = new ArrayDeque<>();
+        availableConnections = new ArrayDeque<>(10);
         connectionsInUse = new ArrayDeque<>();
     }
 
     public static ConnectionPool getInstance() {
-        throw new UnsupportedOperationException();
-        //connectionFactory.create()
+        if (connectionPool == null) {
+            synchronized (ConnectionPool.class) {
+                if (connectionPool == null) {
+                    connectionPool = new ConnectionPool();
+                }
+            }
+        }
+        return connectionPool;
     }
 
     public void returnConnection(ProxyConnection proxyConnection) {
@@ -35,7 +43,7 @@ public class ConnectionPool {
     }
 
     public ProxyConnection getConnection() {
-        //return ConnectionFactory.create();
+        throw new UnsupportedOperationException();
     }
 
 }

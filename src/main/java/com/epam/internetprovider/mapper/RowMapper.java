@@ -1,19 +1,16 @@
 package com.epam.internetprovider.mapper;
 
-import com.epam.internetprovider.entity.Identifable;
-import com.epam.internetprovider.entity.User;
+import com.epam.internetprovider.entity.Identifiable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public interface RowMapper<T extends Identifable> {
+public interface RowMapper<T extends Identifiable> {
 
     T map(ResultSet resultSet) throws SQLException;
 
-    static RowMapper<? extends Identifable> create(String table) {
+    static RowMapper<? extends Identifiable> create(String table) {
         switch (table) {
-            case User.TABLE:
-                return new UserRowMapper();
             default:
                 throw new IllegalArgumentException("Unknown table = " + table);
         }

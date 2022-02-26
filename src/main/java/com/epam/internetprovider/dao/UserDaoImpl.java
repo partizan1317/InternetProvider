@@ -44,7 +44,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     protected String getTableName() {
-        return User.TABLE;
+        //return User.TABLE;
+        return "ZAEBALO";
     }
 
 }

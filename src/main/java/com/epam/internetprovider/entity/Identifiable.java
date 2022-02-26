@@ -1,5 +1,5 @@
 package com.epam.internetprovider.entity;
 
-public interface Identifable {
+public interface Identifiable {
     Long getId();
 }
