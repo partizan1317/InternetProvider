@@ -3,9 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 <%@ page session="true" %>
-<fmt:setLocale value="en"/>
+<c:if test = "${empty sessionScope.locale}">
+    <fmt:setLocale value="en"/>
+</c:if>
+<c:if test = "${not empty sessionScope.locale}">
+    <fmt:setLocale value="${sessionScope.locale}"/>
+</c:if>
 <fmt:setBundle basename="locale" var="loc"/>
-<fmt:message bundle="${loc}" key="header.language" var="language"/>
+<fmt:message bundle="${loc}" key="header.language" var="lang"/>
 <fmt:message bundle="${loc}" key="header.logo" var="logo"/>
 <fmt:message bundle="${loc}" key="header.login" var="login"/>
 <fmt:message bundle="${loc}" key="header.dropdown.ru" var="rus"/>
@@ -14,23 +19,28 @@
 <fmt:message bundle="${loc}" key="header.logout" var="logout"/>
 <header>
     <div class="header__inner">
-        <a class="header__logo" href="#">${logo}</a>
+        <c:if test="${sessionScope.isLoggedIn}">
+            <a class="header__logo" href="<c:url value="controller?command=main-page"/>">${logo}</a>
+        </c:if>
+        <c:if test="${!sessionScope.isLoggedIn}">
+            <a class="header__logo" href="<c:url value="controller?command=login-page"/>">${logo}</a>
+        </c:if>
         <nav class="nav__header">
             <div class="dropdown">
-                <form method="post" action="controller?command=language-change" id="language-change">
-                    <button class="dropbtn">${language}</button>
+                <form method="post" action="controller?command=language-change">
+                    <button class="dropbtn">${lang}</button>
                     <div class="dropdown-content">
-                        <button type="submit" name="locale" value="en_US" href="#">${eng}</button>
-                        <button type="submit" name="locale" value="ru_RU" href="#">${rus}</button>
-                        <button type="submit" name="locale" value="bel_BEL" href="#">${by}</button>
+                        <button type="submit" name="locale" value="en_US">${eng}</button>
+                        <button type="submit" name="locale" value="ru_RU">${rus}</button>
+                        <button type="submit" name="locale" value="bel_BEL">${by}</button>
                     </div>
                 </form>
             </div>
             <c:if test="${!sessionScope.isLoggedIn}">
-                <a class ="nav__link" href="#">${logout}</a>
+                <a class ="nav__link" href="#">${login}</a>
             </c:if>
             <c:if test="${sessionScope.isLoggedIn}">
-                <a class ="nav__link" href="#">${logout}</a>
+                <a class ="nav__link" href="<c:url value="controller?command=logout"/>">${logout}</a>
             </c:if>
         </nav>
     </div>

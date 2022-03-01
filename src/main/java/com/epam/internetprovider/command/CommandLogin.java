@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
-public class LoginCommand implements Command {
+public class CommandLogin implements Command {
 
     private static final String PARAM_NAME_LOGIN = "login";
     private static final String PARAM_NAME_PASSWORD = "password";
 
     private final SimpleUserService service;
 
-    public LoginCommand(SimpleUserService service) {
+    public CommandLogin(SimpleUserService service) {
         this.service = service;
     }
 
@@ -28,7 +28,7 @@ public class LoginCommand implements Command {
         if (user.isPresent()) {
             request.getSession().setAttribute("user", user.get());
             request.getSession().setAttribute("isLoggedIn", true);
-            result = CommandResult.forward("/main-user-page.jsp");
+            result = CommandResult.forward("/WEB-INF/pages/main-user-page.jsp");
         } else {
             request.setAttribute("errorMessage", "Invalid login or password");
             result = CommandResult.forward("/login-page.jsp");

@@ -81,13 +81,14 @@ header {
 }
 
 .dropdown:hover .dropbtn {
-    
+
     background-color: #CF90D0;
 }
 
 /* Nav */
 .nav__header {
     margin-right: 80px;
+    text-transform: uppercase;
 }
 
 .nav__link {
@@ -131,25 +132,70 @@ header {
 
 main {
     display: flex;
-    height: 70vh;
-    justify-content: center;
-    align-items: center;
 }
 
-.login__form {
-    margin: 0;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.nav__section {
+    min-width: 228px;
+    position: relative;
+    height: 92vh;
+    width: 50vh;
+    background-color: #F6D6F6;
 }
 
-.login__title {
-    font-size: 70px;
+.btns {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    position: absolute;
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
+}
+
+.nav__btn {
+    font-size: 16px;
+    margin-bottom: 40px;
+    border: 0;
+    border-radius: 20px;
+    height: 47px;
+    width: 220px;
+    background-color: #F3A9E7;
+    color: white;
+    text-align: center;
+
+    transition: background-color .2s;
+}
+
+.nav__btn:hover {
+    background-color: #F883E5;
+}
+
+.container {
+    position: relative;
+    min-width: 382px;
+    display: flex;
+    align-items: center;
+    height: 92vh;
+    width: 180vh;
+    background-color: #672661;
+}
+
+.balance {
+    font-size: 20px;
+    color:#fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.label__refill {
+    margin-left: 20px;
+    font-size: 22px;
     color: white;
 }
 
-.login {
+.input__field {
+    margin-left: 10px;
     box-sizing: border-box;
     box-shadow: inset 0 1px 5px rgba(0,0,0,0.2);
     border: 1px solid #ccc;
@@ -157,15 +203,8 @@ main {
     height: 30px;
 }
 
-.password {
-    box-sizing: border-box;
-    box-shadow: inset 0 1px 5px rgba(0,0,0,0.2);
-    border: 1px solid #ccc;
-    width: 250px;
-    height: 30px;
-}
-
-.btn__sumbit {
+.refill__btn {
+    margin: 10px;
     font-size: 16px;
     color: white;
 	border: 0;
@@ -173,10 +212,13 @@ main {
     width: 230px;
     height: 40px;
     border-radius: 20px;
+    transition: background-color .2s;
 }
 
-.btn__sumbit:hover {
-	background-color: #F883E5;
+.refill__btn:hover {
+    background-color: #F883E5;
 }
 
-
+.img__money {
+    width: 300px;
+}

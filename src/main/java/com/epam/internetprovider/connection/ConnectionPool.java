@@ -1,5 +1,6 @@
 package com.epam.internetprovider.connection;
 
+import java.sql.Connection;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.locks.ReentrantLock;
@@ -16,7 +17,7 @@ public class ConnectionPool {
     private final ConnectionFactory connectionFactory = new ConnectionFactory();
 
     private ConnectionPool() {
-        availableConnections = new ArrayDeque<>(10);
+        availableConnections = new ArrayDeque<>();
         connectionsInUse = new ArrayDeque<>();
     }
 
@@ -25,6 +26,8 @@ public class ConnectionPool {
             synchronized (ConnectionPool.class) {
                 if (connectionPool == null) {
                     connectionPool = new ConnectionPool();
+                    for(int i = 0; i < 10; i ++) {
+                    }
                 }
             }
         }

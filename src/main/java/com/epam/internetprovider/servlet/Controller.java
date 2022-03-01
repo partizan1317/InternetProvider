@@ -13,6 +13,8 @@ import java.io.IOException;
 
 public class Controller extends HttpServlet {
 
+    private static final long serialVersionUID = -7560675906704947226L;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         process(request, response);

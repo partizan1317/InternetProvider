@@ -88,7 +88,6 @@ header {
 /* Nav */
 .nav__header {
     margin-right: 80px;
-    text-transform: uppercase;
 }
 
 .nav__link {
@@ -137,7 +136,7 @@ main {
 
 .nav__section {
     position: relative;
-    height: 77vh;
+    height: 92vh;
     width: 50vh;
     background-color: #F6D6F6;
 }
@@ -175,20 +174,12 @@ main {
     align-content: center;
     justify-content: center;
     vertical-align: middle;
-    height: 77vh;
-    width: 165vh;
+    height: 92vh;
+    width: 180vh;
     background-color: #672661;
 }
 
 span {
     font-size: 32px;
     color: #fff;
-}
-
-/* Footer */
-
-footer {
-    margin-top: 50px;
-    background-color: #CF90D0;
-    height: 150px;
 }
