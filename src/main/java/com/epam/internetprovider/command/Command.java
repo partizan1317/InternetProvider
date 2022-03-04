@@ -4,8 +4,9 @@ import com.epam.internetprovider.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 
 public interface Command {
 
-    CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException;
+    CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, UnsupportedEncodingException;
 }

@@ -1,8 +1,8 @@
-<%@ page isELIgnored="false"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/style.css">
 </head>
 <body>

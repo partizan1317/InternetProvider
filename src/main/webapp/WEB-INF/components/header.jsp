@@ -18,6 +18,7 @@
 <fmt:message bundle="${loc}" key="header.dropdown.by" var="by"/>
 <fmt:message bundle="${loc}" key="header.logout" var="logout"/>
 <header>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <div class="header__inner">
         <c:if test="${sessionScope.isLoggedIn}">
             <a class="header__logo" href="<c:url value="controller?command=main-page"/>">${logo}</a>
