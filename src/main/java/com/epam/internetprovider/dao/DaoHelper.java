@@ -15,8 +15,12 @@ public class DaoHelper implements AutoCloseable {
         this.connection = pool.getConnection();
     }
 
+    public UserDao createUserDao() {
+        return new UserDaoImpl(connection);
+    }
+
     @Override
-    public void close() throws Exception {
+    public void close() {
         connection.close();
     }
 

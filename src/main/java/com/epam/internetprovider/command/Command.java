@@ -8,5 +8,5 @@ import java.io.UnsupportedEncodingException;
 
 public interface Command {
 
-    CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException, UnsupportedEncodingException;
+    CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

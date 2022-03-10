@@ -16,9 +16,12 @@ public class CommandChangeLanguage implements Command {
             request.getSession().setAttribute("locale","en");
         } else if (Objects.equals(language, "ru_RU")) {
             request.getSession().setAttribute("locale", "ru");
-            request.setCharacterEncoding("UTF-8");
-            response.setCharacterEncoding("UTF-8");
         }
-        return CommandResult.forward("/main-user-page.jsp");
+        else {
+            request.getSession().setAttribute("locale","by");
+        }
+//        String uri = request.getRequestURI();
+//        String currentPage = uri.substring(uri.lastIndexOf("/") + 1);
+        return CommandResult.forward("/login-page.jsp");
     }
 }

@@ -15,10 +15,10 @@
 <fmt:message bundle="${loc}" key="navSectionUser.tariffs" var="tariffs"/>
 <div class="nav__section">
     <div class="btns">
+        <button class="nav__btn" type="submit">${profile}</button>
         <form method="post" action="controller?command=refill-page">
-            <button class="nav__btn" type="submit">${profile}</button>
+            <button class="nav__btn" type="submit">${refill}</button>
         </form>
-        <button class="nav__btn" type="submit">${refill}</button>
         <button class="nav__btn" type="submit">${tariffs}</button>
     </div>
 </div>
