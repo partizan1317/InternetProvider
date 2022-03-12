@@ -9,24 +9,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
 
     private final Connection connection;
     private final RowMapper<T> rowMapper;
+    private final String table;
 
-    protected AbstractDao(Connection connection, RowMapper<T> rowMapper) {
+    protected AbstractDao(Connection connection, RowMapper<T> rowMapper,String table) {
         this.connection = connection;
         this.rowMapper = rowMapper;
+        this.table = table;
     }
 
     protected List<T> executeQuery(String query, Object... params) throws DaoException {
         try(PreparedStatement statement = createStatement(query, params);
-            ResultSet resultSet = statement.executeQuery(query)) {
+            ResultSet resultSet = statement.executeQuery()) {
             List<T> entities = new ArrayList<>();
             while(resultSet.next()) {
                 T entity = rowMapper.map(resultSet);
@@ -47,10 +46,22 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
         return statement;
     }
 
+//    @Override
+//    public Optional<T> getById(Long id) {
+//        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
+//        String query = "SELECT * FROM " + table + " WHERE id=?;";
+//        return executeForSingleResult(query, mapper, id);
+//    }
+
     public List<T> getAll() throws DaoException {
-        String table = getTableName();
         RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
         return executeQuery("select * from " + table, mapper);
+    }
+
+    @Override
+    public void removeById(Long id) throws SQLException {
+        PreparedStatement statement = createStatement("DELETE FROM " + table + " WHERE id=?;", id);
+        statement.executeUpdate();
     }
 
     protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException {
@@ -65,13 +76,10 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
     }
 
     @Override
-    public void save(T item) {
+    public void save(T item) throws DaoException {
         Map<String, Object> fields = getFields(item);
-        if (item.getId() == null) {
-            //insert
-        } else {
-            //update
-        }
+        String query = (item.getId() == null) ? generateInsertQuery(fields.keySet()) : generateUpdateQuery(fields.keySet());
+        executeUpdate(query, fields.values());
     }
 
     public boolean executeUpdate(String query, Object... params) throws DaoException {
@@ -82,15 +90,25 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
         }
     }
 
-    private String generateInsertQuery(Map<String, Object> fields) {
-        throw new UnsupportedOperationException();
+    private String generateInsertQuery(Collection<String> fields) {
+        return String.format("INSERT INTO %s(%s);",
+                table,
+                String.join(", ", fields),
+                String.join(", ", Collections.nCopies(fields.size(), "?"))
+        );
     }
 
-    private String generateUpdateQuery(Map<String, Object> fields) {
-        throw new UnsupportedOperationException();
+    private String generateUpdateQuery(Collection<String> fields) {
+        String updatePrefix = "UPDATE " + table;
+        StringJoiner updateQuery = new StringJoiner(", ", updatePrefix, ";" );
+        for (String field : fields) {
+            updateQuery.add(field + " = ?");
+        }
+        return updateQuery.toString();
     }
 
     protected abstract Map<String, Object> getFields(T item);
+
 
     protected abstract String getTableName();
 }

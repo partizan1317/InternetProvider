@@ -33,7 +33,7 @@ public class Controller extends HttpServlet {
             dispatch(request, response, result);
         } catch (Exception e) {
             request.setAttribute("errorMessage", e.getMessage());
-            dispatch(request, response, CommandResult.forward("/error.jsp"));
+            dispatch(request, response, CommandResult.forward("/WEB-INF/pages/error-page.jsp"));
         }
     }
 

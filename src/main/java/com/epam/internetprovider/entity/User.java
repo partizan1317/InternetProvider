@@ -15,6 +15,8 @@ public class User implements Identifiable, Serializable {
     public static final String IS_ADMIN = "is_admin";
     public static final String AMOUNT = "amount";
     public static final String LOGIN = "login";
+    public static final String IS_BLOCKED = "is_blocked";
+    public static final String TARIFF_ID = "tariff_id";
 
     private long id;
     private String login;
@@ -23,9 +25,10 @@ public class User implements Identifiable, Serializable {
     private boolean isAdmin;
     private boolean isBlocked;
     private BigDecimal amount;
+    private long tariff_id;
 
     public User(long id, String name, String surname,String login, BigDecimal amount, boolean isAdmin,
-                boolean isBlocked) {
+                boolean isBlocked,long tariff_id) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -33,6 +36,7 @@ public class User implements Identifiable, Serializable {
         this.amount = amount;
         this.isAdmin = isAdmin;
         this.isBlocked = isBlocked;
+        this.tariff_id = tariff_id;
     }
 
 

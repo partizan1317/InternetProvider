@@ -4,37 +4,44 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayDeque;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
 
-    private final Queue<ProxyConnection> availableConnections;
-    private final Queue<ProxyConnection> connectionsInUse;
-    
-    private volatile static ConnectionPool connectionPool;
+    private volatile static ConnectionPool instance;
+
+
+    private static final int INITIAL_POOL_SIZE_OF_PROXY_CONNECTIONS = 10;
+    private final static Queue<ProxyConnection> availableConnections = new ArrayDeque<>(INITIAL_POOL_SIZE_OF_PROXY_CONNECTIONS);
+    private final Queue<ProxyConnection> connectionsInUse = new ArrayDeque<>(INITIAL_POOL_SIZE_OF_PROXY_CONNECTIONS);
 
     private final ReentrantLock connectionsLock = new ReentrantLock();
+    private static final ReentrantLock LOCK = new ReentrantLock();
 
-    private final ConnectionFactory connectionFactory = new ConnectionFactory();
+    private final static ConnectionFactory connectionFactory = new ConnectionFactory();
 
-    private ConnectionPool() throws SQLException, IOException, ClassNotFoundException {
-        availableConnections = new ArrayDeque<>();
-        connectionsInUse = new ArrayDeque<>();
-        for (int i = 0; i < 10; i++) {
-            availableConnections.add(connectionFactory.create());
-        }
+    private ConnectionPool() {
     }
 
-    public static ConnectionPool getInstance() throws SQLException, IOException, ClassNotFoundException {
-        if (connectionPool == null) {
-            synchronized (ConnectionPool.class) {
-                if (connectionPool == null) {
-                    connectionPool = new ConnectionPool();
+    public static ConnectionPool getInstance() {
+        ConnectionPool localInstance = instance;
+        if (localInstance == null) {
+            LOCK.lock();
+            localInstance = instance;
+            try {
+                if (localInstance == null) {
+                    localInstance = new ConnectionPool();
+                    instance = localInstance;
+                    initializeConnections();
                 }
             }
+            finally {
+                LOCK.unlock();
+            }
         }
-        return connectionPool;
+        return instance;
     }
 
     public void returnConnection(ProxyConnection proxyConnection) {
@@ -53,6 +60,16 @@ public class ConnectionPool {
             return availableConnections.poll();
         }
         return null;
+    }
+
+    private static void initializeConnections() {
+        try {
+            List<ProxyConnection> connections = connectionFactory.create(instance, 10);
+            availableConnections.addAll(connections);
+        }
+        catch (SQLException | IOException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

@@ -9,13 +9,14 @@ import java.sql.SQLException;
 public class UserRowMapper implements RowMapper<User>{
     @Override
     public User map(ResultSet resultSet) throws SQLException {
-        long id = resultSet.getLong("id");
-        String name = resultSet.getString("name");
-        String surname = resultSet.getString("surname");
-        String login = resultSet.getString("login");
-        boolean isAdmin = resultSet.getBoolean("is_Admin");
-        BigDecimal amount = resultSet.getBigDecimal("amount");
-        boolean isBlocked = resultSet.getBoolean("is_Blocked");
-        return new User(id, name, surname, login, amount, isAdmin, isBlocked);
+        long id = resultSet.getLong(User.ID);
+        String name = resultSet.getString(User.NAME);
+        String surname = resultSet.getString(User.SURNAME);
+        String login = resultSet.getString(User.LOGIN);
+        boolean isAdmin = resultSet.getBoolean(User.IS_ADMIN);
+        BigDecimal amount = resultSet.getBigDecimal(User.AMOUNT);
+        boolean isBlocked = resultSet.getBoolean(User.IS_BLOCKED);
+        long tariff_id = resultSet.getLong(User.TARIFF_ID);
+        return new User(id, name, surname, login, amount, isAdmin, isBlocked, tariff_id);
     }
 }

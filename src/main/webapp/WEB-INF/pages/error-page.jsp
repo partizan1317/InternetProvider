@@ -3,10 +3,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/login-page-style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/error-page-style.css">
 </head>
 <body>
     <jsp:include page="/WEB-INF/components/header.jsp"/>
-    <jsp:include page="/WEB-INF/components/login-page-main.jsp"/>
+    <jsp:include page="/WEB-INF/components/error-page-main.jsp"/>
 </body>
-</html>   
+</html>
