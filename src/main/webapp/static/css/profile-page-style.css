@@ -169,6 +169,31 @@ main {
     background-color: #F883E5;
 }
 
+.change__btns {
+    display: flex;
+    flex-direction: column;
+    margin-left: 200px;
+    margin-top: 120;
+}
+
+.change__btn {
+    font-size: 16px;
+    margin-bottom: 40px;
+    border: 0;
+    border-radius: 20px;
+    height: 47px;
+    width: 220px;
+    background-color: #F3A9E7;
+    color: white;
+    text-align: center;
+
+    transition: background-color .2s;
+}
+
+.change__btn:hover {
+    background-color: #F883E5;
+}
+
 .container {
     position: relative;
     min-width: 382px;
@@ -179,6 +204,20 @@ main {
     background-color: #672661;
 }
 
+.img__user {
+    width: 20%;
+    margin-left: 50px;
+    margin-bottom: 250px;
+}
+
+
+.info__fields {
+    margin-left: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
 .balance {
     font-size: 20px;
     color:#fff;
@@ -187,21 +226,12 @@ main {
     top: 0;
 }
 
-.label__refill {
+span {
     margin-left: 20px;
-    font-size: 22px;
+    font-size: 26px;
     color: white;
+    padding: 23px;
 }
-
-.input__field {
-    margin-left: 10px;
-    box-sizing: border-box;
-    box-shadow: inset 0 1px 5px rgba(0,0,0,0.2);
-    border: 1px solid #ccc;
-    width: 250px;
-    height: 30px;
-}
-
 .refill__btn {
     margin: 10px;
     font-size: 16px;
@@ -216,8 +246,4 @@ main {
 
 .refill__btn:hover {
     background-color: #F883E5;
-}
-
-.img__money {
-    width: 300px;
 }

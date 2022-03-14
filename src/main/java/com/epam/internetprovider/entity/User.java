@@ -45,6 +45,14 @@ public class User implements Identifiable, Serializable {
         this.login = login;
     }
 
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
     @Override
     public Long getId() {
         return id;

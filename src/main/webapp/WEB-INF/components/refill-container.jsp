@@ -21,6 +21,6 @@
         <img class="img__money" src="${pageContext.request.contextPath}/static/img/money.png" alt="money.png">
     </form>
     <div class="balance">
-        <span>${balance}</span>
+        ${balance}${sessionScope.user.amount}
     </div>
 </div>

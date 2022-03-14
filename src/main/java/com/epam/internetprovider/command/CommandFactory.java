@@ -15,6 +15,7 @@ public class CommandFactory {
     private static final String MAIN_USER_PAGE = "/WEB-INF/pages/main-user-page.jsp";
     private static final String REFILL_PAGE = "/WEB-INF/pages/refill-page.jsp";
     private static final String LOGIN_PAGE = "/login-page.jsp";
+    private static final String PROFILE_PAGE = "/WEB-INF/pages/profile-page.jsp";
 
     public static Command create(String command){
         switch(command) {
@@ -30,6 +31,8 @@ public class CommandFactory {
                 return new CommandShowPage(LOGIN_PAGE);
             case "refill-page":
                 return new CommandShowPage(REFILL_PAGE);
+            case "profile-page":
+                return new CommandShowPage(PROFILE_PAGE);
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);
         }
