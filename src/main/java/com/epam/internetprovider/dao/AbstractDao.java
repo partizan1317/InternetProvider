@@ -46,12 +46,11 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
         return statement;
     }
 
-//    @Override
-//    public Optional<T> getById(Long id) {
-//        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
-//        String query = "SELECT * FROM " + table + " WHERE id=?;";
-//        return executeForSingleResult(query, mapper, id);
-//    }
+    @Override
+    public Optional<T> getById(Long id) throws DaoException {
+        String query = "SELECT * FROM " + table + " WHERE id=?;";
+        return executeForSingleResult(query, id);
+    }
 
     public List<T> getAll() throws DaoException {
         RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);

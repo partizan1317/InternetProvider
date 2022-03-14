@@ -4,6 +4,7 @@ import com.epam.internetprovider.entity.User;
 import com.epam.internetprovider.exception.DaoException;
 import com.epam.internetprovider.mapper.UserRowMapper;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     public Optional<User> findUserByLoginAndPassword(String login, String password) throws DaoException {
         return executeForSingleResult(FIND_BY_LOGIN_AND_PASSWORD, login, password);
+    }
+
+    public void topUpBalance(User user) throws DaoException {
+        save(user);
     }
 
     @Override
@@ -44,7 +49,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     protected Map<String, Object> getFields(User item) {
         Map<String, Object> fields = new HashMap<>();
-        fields.put(User.NAME, null);//item.getName());;
+        fields.put(User.NAME, item.getName());
+        fields.put(User.SURNAME, item.getSurname());
+        fields.put(User.AMOUNT, item.getAmount());
+        fields.put(User.IS_BLOCKED, item.isBlocked());
         return fields;
     }
 
@@ -54,8 +62,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     protected String getTableName() {
-        //return User.TABLE;
-        return "ZAEBALO";
+        return User.TABLE;
     }
 
 }

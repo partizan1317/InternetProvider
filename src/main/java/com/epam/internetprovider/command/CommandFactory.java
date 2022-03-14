@@ -1,14 +1,8 @@
 package com.epam.internetprovider.command;
 
 import com.epam.internetprovider.dao.DaoHelperFactory;
-import com.epam.internetprovider.dao.SimpleUserDao;
-import com.epam.internetprovider.dao.UserDaoImpl;
-import com.epam.internetprovider.service.SimpleUserService;
+import com.epam.internetprovider.service.TariffServiceImpl;
 import com.epam.internetprovider.service.UserServiceImpl;
-
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class CommandFactory {
 
@@ -32,7 +26,9 @@ public class CommandFactory {
             case "refill-page":
                 return new CommandShowPage(REFILL_PAGE);
             case "profile-page":
-                return new CommandShowPage(PROFILE_PAGE);
+                return new CommandProfilePage(new TariffServiceImpl(new DaoHelperFactory()));
+            case "refill":
+                return new CommandRefill(new UserServiceImpl(new DaoHelperFactory()));
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);
         }

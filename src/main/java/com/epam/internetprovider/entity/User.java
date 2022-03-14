@@ -39,7 +39,6 @@ public class User implements Identifiable, Serializable {
         this.tariff_id = tariff_id;
     }
 
-
     public User(long id, String login) {
         this.id = id;
         this.login = login;
@@ -51,6 +50,46 @@ public class User implements Identifiable, Serializable {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public long getTariff_id() {
+        return tariff_id;
+    }
+
+    public void setTariff_id(long tariff_id) {
+        this.tariff_id = tariff_id;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
     }
 
     @Override

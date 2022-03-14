@@ -16,7 +16,7 @@ public class UserRowMapper implements RowMapper<User>{
         boolean isAdmin = resultSet.getBoolean(User.IS_ADMIN);
         BigDecimal amount = resultSet.getBigDecimal(User.AMOUNT);
         boolean isBlocked = resultSet.getBoolean(User.IS_BLOCKED);
-        long tariff_id = resultSet.getLong(User.TARIFF_ID);
-        return new User(id, name, surname, login, amount, isAdmin, isBlocked, tariff_id);
+        long tariffId = resultSet.getLong(User.TARIFF_ID);
+        return new User(id, name, surname, login, amount, isAdmin, isBlocked, tariffId);
     }
 }

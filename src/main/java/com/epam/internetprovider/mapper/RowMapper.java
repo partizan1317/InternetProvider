@@ -1,6 +1,8 @@
 package com.epam.internetprovider.mapper;
 
 import com.epam.internetprovider.entity.Identifiable;
+import com.epam.internetprovider.entity.Promotion;
+import com.epam.internetprovider.entity.Tariff;
 import com.epam.internetprovider.entity.User;
 
 import java.sql.ResultSet;
@@ -14,6 +16,10 @@ public interface RowMapper<T extends Identifiable> {
         switch (table) {
             case User.TABLE:
                 return new UserRowMapper();
+            case Tariff.TABLE:
+                return new TariffRowMapper();
+            case Promotion.TABLE:
+                return new PromotionRowMapper();
             default:
                 throw new IllegalArgumentException("Unknown table = " + table);
         }

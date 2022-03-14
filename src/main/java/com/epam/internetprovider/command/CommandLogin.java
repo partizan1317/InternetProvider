@@ -1,8 +1,6 @@
 package com.epam.internetprovider.command;
 
 import com.epam.internetprovider.entity.User;
-import com.epam.internetprovider.exception.ServiceException;
-import com.epam.internetprovider.service.SimpleUserService;
 import com.epam.internetprovider.service.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;

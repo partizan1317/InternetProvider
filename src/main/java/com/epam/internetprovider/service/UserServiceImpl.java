@@ -29,4 +29,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    public void topUp(User user) throws Exception  {
+        try(DaoHelper helper = daoHelperFactory.create()){
+            helper.startTransaction();
+            UserDao dao = helper.createUserDao();
+            dao.topUpBalance(user);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+
+
 }

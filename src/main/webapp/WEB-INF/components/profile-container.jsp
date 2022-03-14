@@ -21,10 +21,10 @@
 <div class="container">
     <img class="img__user" src="${pageContext.request.contextPath}/static/img/user.png" alt="user.png">
     <div class="info__fields">
-        <span>${login}: partizan</span>
-        <span>${name}: Evgeniy</span>
-        <span>${surname}: Sobol</span>
-        <span>${tariff}: Advance</span>
+        <span>${login}: ${sessionScope.user.login}</span>
+        <span>${name}: ${sessionScope.user.name}</span>
+        <span>${surname}: ${sessionScope.user.surname}</span>
+        <span>${tariff}: ${requestScope.tariff.name}</span>
     </div>
     <div class="change__btns">
         <button class="change__btn" type="submit">${changeName}</button>
@@ -32,6 +32,6 @@
         <button class="change__btn" type="submit">${changeTariff}</button>
     </div>
     <div class="balance">
-         ${balance}: 0.00
+         ${balance} ${sessionScope.user.amount}
     </div>
 </div>

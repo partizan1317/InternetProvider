@@ -16,7 +16,7 @@
 <div class="container">
     <form method="post" action="controller?command=refill">
         <label class="label__refill">${amount}</label>
-        <input class="input__field" type="text" placeholder="0.00" name="amount">
+        <input class="input__field" type="number" placeholder="0.00" name="amount">
         <button class="refill__btn" type="submit" type="submit" value="Refill">${topUp}</button>
         <img class="img__money" src="${pageContext.request.contextPath}/static/img/money.png" alt="money.png">
     </form>

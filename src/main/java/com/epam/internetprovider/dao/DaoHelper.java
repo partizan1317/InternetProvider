@@ -19,6 +19,14 @@ public class DaoHelper implements AutoCloseable {
         return new UserDaoImpl(connection);
     }
 
+    public TariffDao createTariffDao() {
+        return new TariffDaoImpl(connection);
+    }
+
+//    public PromotionDao createPromotionDao() {
+//        return new PromotionDaoImpl(connection);
+//    }
+
     @Override
     public void close() {
         connection.close();
