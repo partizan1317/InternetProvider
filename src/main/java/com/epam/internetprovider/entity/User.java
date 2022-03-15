@@ -3,6 +3,7 @@ package com.epam.internetprovider.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class User implements Identifiable, Serializable {
 
@@ -24,7 +25,7 @@ public class User implements Identifiable, Serializable {
     private String surname;
     private boolean isAdmin;
     private boolean isBlocked;
-    private transient BigDecimal amount;
+    private BigDecimal amount;
     private long tariff_id;
 
     public User(long id, String name, String surname,String login, BigDecimal amount, boolean isAdmin,
@@ -37,6 +38,7 @@ public class User implements Identifiable, Serializable {
         this.isAdmin = isAdmin;
         this.isBlocked = isBlocked;
         this.tariff_id = tariff_id;
+        this.amount.setScale(2, RoundingMode.HALF_UP);
     }
 
     public User(long id, String login) {

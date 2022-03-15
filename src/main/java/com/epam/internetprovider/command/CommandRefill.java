@@ -19,10 +19,9 @@ public class CommandRefill implements Command{
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         User user = (User) request.getSession().getAttribute("user");
         BigDecimal balance = user.getAmount();
-        String amountToTopUp = request.getParameter("amount");
-        double amountToConvert = Double.parseDouble(amountToTopUp);
-        BigDecimal convertedAmountToTopUp = BigDecimal.valueOf(amountToConvert);
-        BigDecimal updatedBalance = balance.add(convertedAmountToTopUp);
+        String amountToTopUpLine = request.getParameter("amount");
+        BigDecimal amountToTopUp = new BigDecimal(amountToTopUpLine);
+        BigDecimal updatedBalance = balance.add(amountToTopUp);
         user.setAmount(updatedBalance);
         service.topUp(user);
         return CommandResult.forward("/WEB-INF/pages/refill-page.jsp");
