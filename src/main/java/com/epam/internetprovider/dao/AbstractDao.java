@@ -1,6 +1,7 @@
 package com.epam.internetprovider.dao;
 
 import com.epam.internetprovider.entity.Identifiable;
+import com.epam.internetprovider.entity.User;
 import com.epam.internetprovider.exception.DaoException;
 import com.epam.internetprovider.mapper.RowMapper;
 
@@ -98,7 +99,7 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
     }
 
     private String generateUpdateQuery(Collection<String> fields) {
-        String updatePrefix = "UPDATE " + table;
+        String updatePrefix = "UPDATE " + User.TABLE + " SET ";
         StringJoiner updateQuery = new StringJoiner(", ", updatePrefix, ";" );
         for (String field : fields) {
             updateQuery.add(field + " = ?");

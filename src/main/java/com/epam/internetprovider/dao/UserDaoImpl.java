@@ -4,6 +4,7 @@ import com.epam.internetprovider.entity.User;
 import com.epam.internetprovider.exception.DaoException;
 import com.epam.internetprovider.mapper.UserRowMapper;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     public void topUpBalance(User user) throws DaoException {
-        save(user);
+        super.save(user);
     }
 
     @Override
@@ -39,11 +40,6 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     public List<User> getAll() throws DaoException {
         return executeQuery("select * from user", new UserRowMapper());
         // return executeQuery("select * from user where " + spec.toSql(), new UserRowMapper());
-    }
-
-    @Override
-    public void save(User item){
-
     }
 
     @Override

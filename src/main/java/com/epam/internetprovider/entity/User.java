@@ -18,13 +18,13 @@ public class User implements Identifiable, Serializable {
     public static final String IS_BLOCKED = "is_blocked";
     public static final String TARIFF_ID = "tariff_id";
 
-    private long id;
+    private final long id;
     private String login;
     private String name;
     private String surname;
     private boolean isAdmin;
     private boolean isBlocked;
-    private BigDecimal amount;
+    private transient BigDecimal amount;
     private long tariff_id;
 
     public User(long id, String name, String surname,String login, BigDecimal amount, boolean isAdmin,
@@ -90,6 +90,10 @@ public class User implements Identifiable, Serializable {
 
     public void setBlocked(boolean blocked) {
         isBlocked = blocked;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
     @Override
