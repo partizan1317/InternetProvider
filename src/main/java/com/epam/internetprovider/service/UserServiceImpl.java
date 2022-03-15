@@ -40,6 +40,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    public void changeName(User user) throws Exception  {
+        try(DaoHelper helper = daoHelperFactory.create()){
+            helper.startTransaction();
+            UserDao dao = helper.createUserDao();
+            dao.changeName(user);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
 
 
 }

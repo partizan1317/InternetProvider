@@ -4,6 +4,7 @@ package com.epam.internetprovider.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Objects;
 
 public class User implements Identifiable, Serializable {
 
@@ -19,17 +20,17 @@ public class User implements Identifiable, Serializable {
     public static final String IS_BLOCKED = "is_blocked";
     public static final String TARIFF_ID = "tariff_id";
 
-    private final long id;
-    private String login;
+    private final Long id;
+    private final String login;
     private String name;
     private String surname;
-    private boolean isAdmin;
-    private boolean isBlocked;
+    private final Boolean isAdmin;
+    private final Boolean isBlocked;
     private BigDecimal amount;
-    private long tariff_id;
+    private final Tariff tariff;
 
-    public User(long id, String name, String surname,String login, BigDecimal amount, boolean isAdmin,
-                boolean isBlocked,long tariff_id) {
+    public User(Long id, String name, String surname,String login, BigDecimal amount, Boolean isAdmin,
+                Boolean isBlocked, Tariff tariff) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -37,69 +38,90 @@ public class User implements Identifiable, Serializable {
         this.amount = amount;
         this.isAdmin = isAdmin;
         this.isBlocked = isBlocked;
-        this.tariff_id = tariff_id;
+        this.tariff = tariff;
         this.amount.setScale(2, RoundingMode.HALF_UP);
-    }
-
-    public User(long id, String login) {
-        this.id = id;
-        this.login = login;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public long getTariff_id() {
-        return tariff_id;
-    }
-
-    public void setTariff_id(long tariff_id) {
-        this.tariff_id = tariff_id;
+    public Tariff getTariff() {
+        return tariff;
     }
 
     public boolean isBlocked() {
         return isBlocked;
     }
 
-    public void setBlocked(boolean blocked) {
-        isBlocked = blocked;
-    }
-
     public boolean isAdmin() {
         return isAdmin;
     }
-
     @Override
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId()) && Objects.equals(getLogin(), user.getLogin()) && Objects.equals(getName(), user.getName()) && Objects.equals(getSurname(), user.getSurname()) && Objects.equals(isAdmin, user.isAdmin) && Objects.equals(isBlocked, user.isBlocked) && Objects.equals(getAmount(), user.getAmount()) && Objects.equals(getTariff(), user.getTariff());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (tariff != null ? tariff.hashCode() : 0);
+        result = 31 * result + (amount != null ? amount.hashCode() : 0);
+        result = 31 * result + (isBlocked ? 1 : 0);
+        result = 31 * result + (isAdmin ? 1 : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", isAdmin=" + isAdmin +
+                ", isBlocked=" + isBlocked +
+                ", amount=" + amount +
+                ", tariff=" + tariff +
+                '}';
     }
 }

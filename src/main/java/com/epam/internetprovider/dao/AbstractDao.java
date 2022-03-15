@@ -6,6 +6,7 @@ import com.epam.internetprovider.exception.DaoException;
 import com.epam.internetprovider.mapper.RowMapper;
 
 
+import java.io.StringBufferInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -79,12 +80,20 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
     public void save(T item) throws DaoException {
         Map<String, Object> fields = getFields(item);
         String query = (item.getId() == null) ? generateInsertQuery(fields.keySet()) : generateUpdateQuery(fields.keySet());
-        executeUpdate(query, fields.values());
+        executeUpdate(query, fields);
     }
 
-    public boolean executeUpdate(String query, Object... params) throws DaoException {
+    public void executeUpdate(String query, Object... params) throws DaoException {
         try(PreparedStatement statement = createStatement(query, params)){
-            return statement.executeUpdate() > 0;
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    public void executeUpdate(String query, Map<String,Object> values) throws DaoException {
+        try(PreparedStatement statement = generatePreparedStatementFromValuesMap(query, values)){
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         }
@@ -105,6 +114,15 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
             updateQuery.add(field + " = ?");
         }
         return updateQuery.toString();
+    }
+
+    private PreparedStatement generatePreparedStatementFromValuesMap(String query, Map<String, Object> valuesMap) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        int preparedStatementIndex = 1;
+        for (String key : valuesMap.keySet()) {
+            preparedStatement.setObject(preparedStatementIndex++, valuesMap.get(key));
+        }
+        return preparedStatement;
     }
 
     protected abstract Map<String, Object> getFields(T item);

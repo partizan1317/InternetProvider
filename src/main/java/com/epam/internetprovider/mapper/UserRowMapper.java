@@ -1,5 +1,6 @@
 package com.epam.internetprovider.mapper;
 
+import com.epam.internetprovider.entity.Tariff;
 import com.epam.internetprovider.entity.User;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ public class UserRowMapper implements RowMapper<User>{
         BigDecimal amount = resultSet.getBigDecimal(User.AMOUNT);
         boolean isBlocked = resultSet.getBoolean(User.IS_BLOCKED);
         long tariffId = resultSet.getLong(User.TARIFF_ID);
-        return new User(id, name, surname, login, amount, isAdmin, isBlocked, tariffId);
+        Tariff tariff = Tariff.byId(tariffId);
+        return new User(id, name, surname, login, amount, isAdmin, isBlocked, tariff);
     }
 }

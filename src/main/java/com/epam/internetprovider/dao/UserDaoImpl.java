@@ -7,15 +7,13 @@ import com.epam.internetprovider.mapper.UserRowMapper;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Connection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     private static final String FIND_BY_LOGIN_AND_PASSWORD = "SELECT * FROM USER WHERE" +
             " LOGIN = ? AND PASSWORD = ?";
+    private static final String UPDATE_NAME = "UPDATE user SET name = ?";
 
     public UserDaoImpl(Connection connection) {
         super(connection, new UserRowMapper(), User.TABLE);
@@ -26,7 +24,12 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     public void topUpBalance(User user) throws DaoException {
-        super.save(user);
+        save(user);
+    }
+
+    public void changeName(User user) throws DaoException {
+//        executeUpdate(UPDATE_NAME, "Игорь");
+        save(user);
     }
 
     @Override
@@ -43,14 +46,21 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
+    public void save(User user) throws DaoException {
+        super.save(user);
+    }
+
+    @Override
     protected Map<String, Object> getFields(User item) {
-        Map<String, Object> fields = new HashMap<>();
+        LinkedHashMap<String, Object> fields = new LinkedHashMap<>();
         fields.put(User.NAME, item.getName());
         fields.put(User.SURNAME, item.getSurname());
-        fields.put(User.AMOUNT, item.getAmount());
-        fields.put(User.IS_BLOCKED, item.isBlocked());
+        fields.put(User.AMOUNT, item.getSurname());
+        fields.put(User.TARIFF_ID, item.getTariff().getId());
         return fields;
     }
+
+
 
     @Override
     public void removeById(Long id) {

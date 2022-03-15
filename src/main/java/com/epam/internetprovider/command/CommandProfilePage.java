@@ -20,7 +20,8 @@ public class CommandProfilePage implements Command{
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             User user = (User) request.getSession().getAttribute("user");
-            long tariffId = user.getTariff_id();
+            Tariff userTariff = user.getTariff();
+            Long tariffId = userTariff.getId();
             Optional<Tariff> tariff = service.getById(tariffId);
             CommandResult result;
             if (tariff.isPresent()) {

@@ -14,6 +14,10 @@ import java.util.Arrays;
 
 public class Controller extends HttpServlet {
 
+    private static final String PARAMETER_COMMAND = "command";
+    private static final String ERROR_ATTRIBUTE = "errorMessage";
+    private static final String ERROR_PAGE_PATH = "/WEB-INF/pages/error-page.jsp";
+
     private static final long serialVersionUID = -7560675906704947226L;
 
     @Override
@@ -27,14 +31,14 @@ public class Controller extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String command = request.getParameter("command");
+        String command = request.getParameter(PARAMETER_COMMAND);
         Command action = CommandFactory.create(command);
         try {
             CommandResult result = action.execute(request, response);
             dispatch(request, response, result);
         } catch (Exception e) {
-            request.setAttribute("errorMessage", Arrays.toString(e.getStackTrace()));
-            dispatch(request, response, CommandResult.forward("/WEB-INF/pages/error-page.jsp"));
+            request.setAttribute(ERROR_ATTRIBUTE, e.getMessage());
+            dispatch(request, response, CommandResult.forward(ERROR_PAGE_PATH));
         }
     }
 

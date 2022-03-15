@@ -33,7 +33,7 @@
                     <div class="dropdown-content">
                         <button type="submit" name="locale" value="en_US">${eng}</button>
                         <button type="submit" name="locale" value="ru_RU">${rus}</button>
-                        <button type="submit" name="locale" value="bel_BEL">${by}</button>
+                        <button type="submit" name="locale" value="by_BY">${by}</button>
                     </div>
                 </form>
             </div>

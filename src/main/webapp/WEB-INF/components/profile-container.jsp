@@ -27,7 +27,9 @@
         <span>${tariff}: ${requestScope.tariff.name}</span>
     </div>
     <div class="change__btns">
-        <button class="change__btn" type="submit">${changeName}</button>
+        <form method="post" action="controller?command=change-name">
+            <button class="change__btn" type="submit">${changeName}</button>
+        </form>
         <button class="change__btn" type="submit">${changeSurname}</button>
         <button class="change__btn" type="submit">${changeTariff}</button>
     </div>

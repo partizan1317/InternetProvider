@@ -173,7 +173,7 @@ main {
     display: flex;
     flex-direction: column;
     margin-left: 200px;
-    margin-top: 120;
+    padding-top: 200px;
 }
 
 .change__btn {
