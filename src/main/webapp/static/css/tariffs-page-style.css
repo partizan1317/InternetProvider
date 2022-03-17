@@ -173,6 +173,7 @@ main {
     display: flex;
     flex-direction: column;
     margin-left: 200px;
+    margin-top: 120;
 }
 
 .change__btn {
@@ -194,25 +195,19 @@ main {
 }
 
 .container {
+    flex-wrap: wrap;
     position: relative;
     min-width: 382px;
     display: flex;
-    align-items: center;
     height: 92vh;
     width: 180vh;
     background-color: #672661;
 }
 
-.img__user {
-    width: 20%;
-    margin-left: 50px;
-    margin-bottom: 250px;
-}
-
-
-.info__fields {
-    margin-left: 50px;
+.tariff {
     position: relative;
+    margin-left: 50px;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
 }
@@ -226,23 +221,29 @@ main {
 }
 
 span {
-    margin-left: 20px;
+    margin-left: 15px;
     font-size: 26px;
     color: white;
-    padding: 23px;
 }
-.refill__btn {
-    margin: 10px;
+
+.buy__btn {
+    margin-top: 5px;
     font-size: 16px;
     color: white;
 	border: 0;
     background-color: #F3A9E7;
-    width: 230px;
+    width: 180px;
     height: 40px;
     border-radius: 20px;
     transition: background-color .2s;
 }
 
-.refill__btn:hover {
+.buy__btn:hover {
     background-color: #F883E5;
+}
+
+img {
+    margin-left: 25px;
+    width: 100px;
+    height: 100px;
 }

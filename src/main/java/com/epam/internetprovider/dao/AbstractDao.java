@@ -42,8 +42,10 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
 
     private PreparedStatement createStatement(String query, Object... params) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(query);
-        for(int i = 1; i <= params.length; i++) {
-            statement.setObject(i, params[i-1]);
+        if (params.length > 0) {
+            for (int i = 1; i <= params.length; i++) {
+                statement.setObject(i, params[i - 1]);
+            }
         }
         return statement;
     }
@@ -55,8 +57,7 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
     }
 
     public List<T> getAll() throws DaoException {
-        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
-        return executeQuery("select * from " + table, mapper);
+        return executeQuery("select * from " + table);
     }
 
     @Override

@@ -21,6 +21,8 @@
         <form method="post" action="controller?command=refill-page">
             <button class="nav__btn" type="submit">${refill}</button>
         </form>
-        <button class="nav__btn" type="submit">${tariffs}</button>
+        <form method="post" action="controller?command=tariffs-page">
+            <button class="nav__btn" type="submit">${tariffs}</button>
+        </form>
     </div>
 </div>

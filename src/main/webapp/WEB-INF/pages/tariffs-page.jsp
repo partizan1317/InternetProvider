@@ -3,10 +3,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/refill-page-style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/tariffs-page-style.css"
 </head>
 <body>
     <jsp:include page="/WEB-INF/components/header.jsp"/>
-    <jsp:include page="/WEB-INF/components/refill-main.jsp"/>
+    <jsp:include page="/WEB-INF/components/tariffs-page-main.jsp"/>
 </body>
 </html>

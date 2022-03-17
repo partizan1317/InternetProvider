@@ -31,6 +31,8 @@ public class CommandFactory {
                 return new CommandRefill(new UserServiceImpl(new DaoHelperFactory()));
             case "change-name" :
                 return new CommandChangeName(new UserServiceImpl(new DaoHelperFactory()));
+            case "tariffs-page":
+                return new CommandTariffsPage(new TariffServiceImpl(new DaoHelperFactory()));
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);
         }
