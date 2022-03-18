@@ -6,7 +6,6 @@ import com.epam.internetprovider.service.TariffServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Optional;
 
 public class CommandTariffsPage implements Command {
 

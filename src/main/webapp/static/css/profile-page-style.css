@@ -170,6 +170,7 @@ main {
 }
 
 .change__btns {
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     margin-left: 200px;

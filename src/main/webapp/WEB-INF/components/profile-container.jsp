@@ -17,7 +17,7 @@
 <fmt:message bundle="${loc}" key="userContainer.btn.changeName" var="changeName"/>
 <fmt:message bundle="${loc}" key="userContainer.btn.changeSurname" var="changeSurname"/>
 <fmt:message bundle="${loc}" key="userContainer.btn.changeTariff" var="changeTariff"/>
-<fmt:message bundle="${loc}" key="refillContainer.balance" var="balance"/>
+<fmt:message bundle="${loc}" key="containerUser.balance" var="balance"/>
 <div class="container">
     <img class="img__user" src="${pageContext.request.contextPath}/static/img/user.png" alt="user.png">
     <div class="info__fields">
@@ -34,6 +34,6 @@
         <button class="change__btn" type="submit">${changeTariff}</button>
     </div>
     <div class="balance">
-         ${balance} ${sessionScope.user.amount}
+         ${balance}: ${sessionScope.user.amount}
     </div>
 </div>

@@ -10,6 +10,7 @@
     <fmt:setLocale value="${sessionScope.locale}"/>
 </c:if>
 <fmt:setBundle basename="locale" var="loc"/>
+<fmt:message bundle="${loc}" key="containerUser.balance" var="balance"/>
 <fmt:message bundle="${loc}" key="tariffsContainer.tariff" var="tariff"/>
 <fmt:message bundle="${loc}" key="tariffsContainer.price" var="price"/>
 <fmt:message bundle="${loc}" key="tariffsContainer.btn.buy" var="buy"/>
@@ -18,11 +19,11 @@
         <div class="tariff">
             <img src="${pageContext.request.contextPath}/static/img/flash.png" alt="flash.png">
             <span>${tariff}: ${tariffs.name}</span>
-            <span>${price}: 1500.00</span>
+            <span>${price}: ${tariffs.price}</span>
             <button class="buy__btn" type="submit">${buy}</button>
         </div>
     </c:forEach>
     <div class="balance">
-        <span>Balance: 0.00</span>
+        ${balance}: ${sessionScope.user.amount}
     </div>
 </div>

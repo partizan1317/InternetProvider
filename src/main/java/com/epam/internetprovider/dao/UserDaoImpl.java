@@ -55,7 +55,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         LinkedHashMap<String, Object> fields = new LinkedHashMap<>();
         fields.put(User.NAME, item.getName());
         fields.put(User.SURNAME, item.getSurname());
-        fields.put(User.AMOUNT, item.getSurname());
+        fields.put(User.AMOUNT, item.getAmount());
         fields.put(User.TARIFF_ID, item.getTariff().getId());
         return fields;
     }

@@ -9,7 +9,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+
 public class TariffDaoImpl extends AbstractDao<Tariff> implements TariffDao {
+
+    private static final String FIND_ALL_TARIFFS_WITH_PRICES = "select tariff.id, tariff.name, tariff.start_Date," +
+            " tariff.end_date, tariff.is_paid, tariff.is_deleted, tariff_price.price from" +
+            " tariff join tariff_price on tariff.id = tariff_price.tariff_id";
+    private static final String FIND_BY_ID = FIND_ALL_TARIFFS_WITH_PRICES + " where tariff.id = ?";
+
     protected TariffDaoImpl(Connection connection) {
         super(connection, new TariffRowMapper(), Tariff.TABLE);
     }
@@ -26,11 +33,11 @@ public class TariffDaoImpl extends AbstractDao<Tariff> implements TariffDao {
 
     @Override
     public Optional<Tariff> getById(Long id) throws DaoException {
-        return super.getById(id);
+        return executeForSingleResult(FIND_BY_ID, id);
     }
 
     @Override
     public List<Tariff> getAll() throws DaoException {
-        return super.getAll();
+        return executeQuery(FIND_ALL_TARIFFS_WITH_PRICES);
     }
 }

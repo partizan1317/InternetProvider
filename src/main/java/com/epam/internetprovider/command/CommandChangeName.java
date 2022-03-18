@@ -17,7 +17,7 @@ public class CommandChangeName implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         User user = (User) request.getSession().getAttribute("user");
-        user.setName("Pavel");
+        user.setName("-");
         service.changeName(user);
         return CommandResult.forward("/WEB-INF/pages/profile-page.jsp");
     }

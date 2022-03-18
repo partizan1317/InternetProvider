@@ -29,11 +29,16 @@
         <nav class="nav__header">
             <div class="dropdown">
                 <form method="post" action="controller?command=language-change">
-                    <button class="dropbtn">${lang}</button>
+                    <c:if test = "${empty sessionScope.locale}">
+                        <button class="dropbtn">${eng}</button>
+                    </c:if>
+                    <c:if test = "${not empty sessionScope.locale}">
+                        <button class="dropbtn">${locale}</button>
+                    </c:if>
                     <div class="dropdown-content">
-                        <button type="submit" name="locale" value="en_US">${eng}</button>
-                        <button type="submit" name="locale" value="ru_RU">${rus}</button>
-                        <button type="submit" name="locale" value="by_BY">${by}</button>
+                        <button type="submit" name="locale" value="EN">${eng}</button>
+                        <button type="submit" name="locale" value="RU">${rus}</button>
+                        <button type="submit" name="locale" value="BY">${by}</button>
                     </div>
                 </form>
             </div>

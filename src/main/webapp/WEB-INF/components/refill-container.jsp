@@ -12,7 +12,7 @@
 <fmt:setBundle basename="locale" var="loc"/>
 <fmt:message bundle="${loc}" key="refillContainer.amount" var="amount"/>
 <fmt:message bundle="${loc}" key="refillContainer.topUp" var="topUp"/>
-<fmt:message bundle="${loc}" key="refillContainer.balance" var="balance"/>
+<fmt:message bundle="${loc}" key="containerUser.balance" var="balance"/>
 <div class="container">
     <form method="post" action="controller?command=refill">
         <label class="label__refill">${amount}</label>
@@ -21,6 +21,6 @@
         <img class="img__money" src="${pageContext.request.contextPath}/static/img/money.png" alt="money.png">
     </form>
     <div class="balance">
-        ${balance}${sessionScope.user.amount}
+        ${balance}: ${sessionScope.user.amount}
     </div>
 </div>
