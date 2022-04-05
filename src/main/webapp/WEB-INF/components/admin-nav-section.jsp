@@ -10,16 +10,16 @@
     <fmt:setLocale value="${sessionScope.locale}"/>
 </c:if>
 <fmt:setBundle basename="locale" var="loc"/>
-<fmt:message bundle="${loc}" key="navSectionUser.profile" var="profile"/>
-<fmt:message bundle="${loc}" key="navSectionUser.refill" var="refill"/>
+<fmt:message bundle="${loc}" key="navSectionAdmin.users" var="users"/>
+<fmt:message bundle="${loc}" key="navSectionAdmin.register" var="register"/>
 <fmt:message bundle="${loc}" key="navSection.tariffs" var="tariffs"/>
 <div class="nav__section">
     <div class="btns">
-        <form method="post" action="controller?command=profile-page">
-            <button class="nav__btn" type="submit">${profile}</button>
+        <form method="post" action="controller?command=admin-users-page">
+            <button class="nav__btn" type="submit">${users}</button>
         </form>
         <form method="post" action="controller?command=refill-page">
-            <button class="nav__btn" type="submit">${refill}</button>
+            <button class="nav__btn" type="submit">${register}</button>
         </form>
         <form method="post" action="controller?command=tariffs-page">
             <button class="nav__btn" type="submit">${tariffs}</button>

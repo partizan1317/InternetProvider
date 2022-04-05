@@ -28,7 +28,7 @@ public class CommandLogin implements Command {
             if (user.isPresent()) {
                 request.getSession().setAttribute("user", user.get());
                 request.getSession().setAttribute("isLoggedIn", true);
-                result = CommandResult.forward("/WEB-INF/pages/main-user-page.jsp");
+                result = CommandResult.forward("/WEB-INF/pages/main-admin-page.jsp");
             } else {
                 request.setAttribute("errorMessage", "Invalid login or password");
                 result = CommandResult.forward("/login-page.jsp");

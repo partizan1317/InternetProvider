@@ -7,6 +7,6 @@
 </head>
 <body>
     <jsp:include page="/WEB-INF/components/header.jsp"/>
-    <jsp:include page="/WEB-INF/components/main-user.jsp"/>
+    <jsp:include page="/WEB-INF/components/admin-main.jsp"/>
 </body>
 </html>

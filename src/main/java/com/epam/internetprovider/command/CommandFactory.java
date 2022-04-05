@@ -10,6 +10,8 @@ public class CommandFactory {
     private static final String REFILL_PAGE = "/WEB-INF/pages/refill-page.jsp";
     private static final String LOGIN_PAGE = "/login-page.jsp";
     private static final String PROFILE_PAGE = "/WEB-INF/pages/profile-page.jsp";
+    private static final String MAIN_ADMIN_PAGE = "/WEB-INF/pages/main-admin-page.jsp";
+    private static final String ADMIN_USERS_PAGE = "/WEB-INF/pages/admin-users-page.jsp";
 
     public static Command create(String command){
         switch(command) {
@@ -33,6 +35,10 @@ public class CommandFactory {
                 return new CommandChangeName(new UserServiceImpl(new DaoHelperFactory()));
             case "tariffs-page":
                 return new CommandTariffsPage(new TariffServiceImpl(new DaoHelperFactory()));
+            case "admin-main-page":
+                return new CommandShowPage(MAIN_ADMIN_PAGE);
+            case "admin-users-page":
+                return new CommandShowPage(ADMIN_USERS_PAGE);
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);
         }
