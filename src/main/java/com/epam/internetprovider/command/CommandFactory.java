@@ -38,7 +38,7 @@ public class CommandFactory {
             case "admin-main-page":
                 return new CommandShowPage(MAIN_ADMIN_PAGE);
             case "admin-users-page":
-                return new CommandShowPage(ADMIN_USERS_PAGE);
+                return new CommandAdminUsersPage(new UserServiceImpl(new DaoHelperFactory()));
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);
         }

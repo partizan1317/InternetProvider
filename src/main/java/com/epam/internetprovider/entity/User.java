@@ -24,8 +24,8 @@ public class User implements Identifiable, Serializable {
     private final String login;
     private String name;
     private String surname;
-    private final Boolean isAdmin;
-    private final Boolean isBlocked;
+    private final Boolean admin;
+    private final Boolean blocked;
     private BigDecimal amount;
     private final Tariff tariff;
 
@@ -36,8 +36,8 @@ public class User implements Identifiable, Serializable {
         this.surname = surname;
         this.login = login;
         this.amount = amount;
-        this.isAdmin = isAdmin;
-        this.isBlocked = isBlocked;
+        this.admin = isAdmin;
+        this.blocked = isBlocked;
         this.tariff = tariff;
         this.amount.setScale(2, RoundingMode.HALF_UP);
     }
@@ -75,11 +75,11 @@ public class User implements Identifiable, Serializable {
     }
 
     public boolean isBlocked() {
-        return isBlocked;
+        return blocked;
     }
 
     public boolean isAdmin() {
-        return isAdmin;
+        return admin;
     }
     @Override
     public Long getId() {
@@ -95,7 +95,7 @@ public class User implements Identifiable, Serializable {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(getId(), user.getId()) && Objects.equals(getLogin(), user.getLogin()) && Objects.equals(getName(), user.getName()) && Objects.equals(getSurname(), user.getSurname()) && Objects.equals(isAdmin, user.isAdmin) && Objects.equals(isBlocked, user.isBlocked) && Objects.equals(getAmount(), user.getAmount()) && Objects.equals(getTariff(), user.getTariff());
+        return Objects.equals(getId(), user.getId()) && Objects.equals(getLogin(), user.getLogin()) && Objects.equals(getName(), user.getName()) && Objects.equals(getSurname(), user.getSurname()) && Objects.equals(admin, user.admin) && Objects.equals(blocked, user.blocked) && Objects.equals(getAmount(), user.getAmount()) && Objects.equals(getTariff(), user.getTariff());
     }
 
     @Override
@@ -106,8 +106,8 @@ public class User implements Identifiable, Serializable {
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (tariff != null ? tariff.hashCode() : 0);
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
-        result = 31 * result + (isBlocked ? 1 : 0);
-        result = 31 * result + (isAdmin ? 1 : 0);
+        result = 31 * result + (blocked ? 1 : 0);
+        result = 31 * result + (admin ? 1 : 0);
         return result;
     }
 
@@ -118,8 +118,8 @@ public class User implements Identifiable, Serializable {
                 ", login='" + login + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", isAdmin=" + isAdmin +
-                ", isBlocked=" + isBlocked +
+                ", isAdmin=" + admin +
+                ", isBlocked=" + blocked +
                 ", amount=" + amount +
                 ", tariff=" + tariff +
                 '}';

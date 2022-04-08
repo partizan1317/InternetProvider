@@ -7,6 +7,7 @@ import com.epam.internetprovider.entity.User;
 import com.epam.internetprovider.exception.DaoException;
 import com.epam.internetprovider.exception.ServiceException;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -51,6 +52,15 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
-
+    public List<User> getAll() throws Exception {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            UserDao dao = helper.createUserDao();
+            List<User> users = dao.getAll();
+            helper.endTransaction();
+            return users;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

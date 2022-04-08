@@ -41,7 +41,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public List<User> getAll() throws DaoException {
-        return executeQuery("select * from user", new UserRowMapper());
+        return executeQuery("select * from user");
         // return executeQuery("select * from user where " + spec.toSql(), new UserRowMapper());
     }
 
@@ -57,6 +57,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         fields.put(User.SURNAME, item.getSurname());
         fields.put(User.AMOUNT, item.getAmount());
         fields.put(User.TARIFF_ID, item.getTariff().getId());
+        fields.put(User.IS_BLOCKED, item.isBlocked());
         return fields;
     }
 
