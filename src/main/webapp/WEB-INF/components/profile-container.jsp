@@ -14,8 +14,7 @@
 <fmt:message bundle="${loc}" key="userContainer.surname" var="surname"/>
 <fmt:message bundle="${loc}" key="userContainer.tariff" var="tariff"/>
 <fmt:message bundle="${loc}" key="userContainer.login" var="login"/>
-<fmt:message bundle="${loc}" key="userContainer.btn.changeName" var="changeName"/>
-<fmt:message bundle="${loc}" key="userContainer.btn.changeSurname" var="changeSurname"/>
+<fmt:message bundle="${loc}" key="userContainer.btn.edit" var="edit"/>
 <fmt:message bundle="${loc}" key="userContainer.btn.changeTariff" var="changeTariff"/>
 <fmt:message bundle="${loc}" key="containerUser.balance" var="balance"/>
 <div class="container">
@@ -27,10 +26,9 @@
         <span>${tariff}: ${requestScope.tariff.name}</span>
     </div>
     <div class="change__btns">
-        <form method="post" action="controller?command=change-name">
-            <button class="change__btn" type="submit">${changeName}</button>
+        <form method="post" action="controller?command=edit-page">
+            <button class="change__btn" type="submit">${edit}</button>
         </form>
-        <button class="change__btn" type="submit">${changeSurname}</button>
         <button class="change__btn" type="submit">${changeTariff}</button>
     </div>
     <div class="balance">
