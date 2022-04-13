@@ -13,15 +13,19 @@
 <fmt:message bundle="${loc}" key="userContainer.name" var="name"/>
 <fmt:message bundle="${loc}" key="userContainer.surname" var="surname"/>
 <fmt:message bundle="${loc}" key="editUserContainer.changeBtn" var="apply"/>
+<fmt:message bundle="${loc}" key="editUserContainer.example.name" var="exampleName"/>
+<fmt:message bundle="${loc}" key="editUserContainer.example.surname" var="exampleSurname"/>
+
 <div class="container">
-    <form method="post" action="controller?command=applyChanges">
+    <form method="post" action="controller?command=change-personal-data">
         <div class="name__container">
             <label>${name}</label>
-            <input class="input__field" type="text" placeholder="${requestScope.userName}" name="name">
+            <input class="input__field" type="text" placeholder="${exampleName}" name="name" value="${requestScope.userName}">
+            </input>
         </div>
         <div class="surname__container">
             <label>${surname}</label>
-            <input class="input__field" type="text" placeholder="${requestScope.userSurname}" name="surname">
+            <input class="input__field" type="text" placeholder="${exampleSurname}" name="surname" value="${requestScope.userSurname}">
         </div>
         <button class="change__btn" type="submit">${apply}</button>
     </form>

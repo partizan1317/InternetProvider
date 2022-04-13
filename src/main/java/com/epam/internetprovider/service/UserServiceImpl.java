@@ -41,11 +41,22 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public void changeName(User user) throws Exception  {
+    public void changePersonalData(User user) throws Exception  {
         try(DaoHelper helper = daoHelperFactory.create()){
             helper.startTransaction();
             UserDao dao = helper.createUserDao();
-            dao.changeName(user);
+            dao.changePersonalData(user);
+            helper.endTransaction();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void changeUserTariff(User user) throws Exception {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            UserDao dao = helper.createUserDao();
+            dao.changeUserTariff(user);
             helper.endTransaction();
         } catch (DaoException e) {
             throw new ServiceException(e);

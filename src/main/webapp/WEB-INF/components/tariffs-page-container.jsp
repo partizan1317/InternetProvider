@@ -14,14 +14,24 @@
 <fmt:message bundle="${loc}" key="tariffsContainer.tariff" var="tariff"/>
 <fmt:message bundle="${loc}" key="tariffsContainer.price" var="price"/>
 <fmt:message bundle="${loc}" key="tariffsContainer.btn.buy" var="buy"/>
+<fmt:message bundle="${loc}" key="tariffsContainer.btn.change" var="change"/>
+
 <div class="container">
     <c:forEach var="tariffs" items="${requestScope.tariffs}">
-        <div class="tariff">
-            <img src="${pageContext.request.contextPath}/static/img/flash.png" alt="flash.png">
-            <span>${tariff}: ${tariffs.name}</span>
-            <span>${price}: ${tariffs.price}</span>
-            <button class="buy__btn" type="submit">${buy}</button>
-        </div>
+        <form method="post" action="controller?command=buy-tariff" name="tariff">
+            <div class="tariff">
+                <img src="${pageContext.request.contextPath}/static/img/flash.png" alt="flash.png">
+                <span>${tariff}: ${tariffs.name}</span>
+                <span>${price}: ${tariffs.price}</span>
+                <input type="hidden" name="tariffId" value="${tariffs.id}">
+                <c:if test = "${empty sessionScope.user.tariff}">
+                    <button class="buy__btn" type="submit">${buy}</button>
+                </c:if>
+                <c:if test = "${not empty sessionScope.user.tariff}">
+                    <button class="buy__btn" type="submit">${change}</button>
+                </c:if>
+            </div>
+        </form>
     </c:forEach>
     <div class="balance">
         ${balance}: ${sessionScope.user.amount}

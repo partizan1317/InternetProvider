@@ -39,6 +39,7 @@ public class Tariff implements Identifiable, Serializable {
         return new Tariff(id, null, null, null, false, false, null);
     }
 
+
     public String getName() {
         return name;
     }

@@ -27,7 +27,7 @@ public class User implements Identifiable, Serializable {
     private final Boolean admin;
     private final Boolean blocked;
     private BigDecimal amount;
-    private final Tariff tariff;
+    private Tariff tariff;
 
     public User(Long id, String name, String surname,String login, BigDecimal amount, Boolean isAdmin,
                 Boolean isBlocked, Tariff tariff) {
@@ -52,6 +52,10 @@ public class User implements Identifiable, Serializable {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public void setTariff(Tariff tariff) {
+        this.tariff = tariff;
     }
 
     public BigDecimal getAmount() {

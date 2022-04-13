@@ -57,7 +57,9 @@ public class ConnectionPool {
 
     public ProxyConnection getConnection() {
         if (!availableConnections.isEmpty()){
-            return availableConnections.poll();
+            ProxyConnection proxyConnection = availableConnections.poll();
+            connectionsInUse.add(proxyConnection);
+            return proxyConnection;
         }
         return null;
     }

@@ -29,7 +29,9 @@
         <form method="post" action="controller?command=edit-page">
             <button class="change__btn" type="submit">${edit}</button>
         </form>
-        <button class="change__btn" type="submit">${changeTariff}</button>
+        <form method="post" action="controller?command=tariffs-page">
+            <button class="change__btn" type="submit">${changeTariff}</button>
+        </form>
     </div>
     <div class="balance">
          ${balance}: ${sessionScope.user.amount}

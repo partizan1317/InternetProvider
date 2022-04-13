@@ -31,8 +31,8 @@ public class CommandFactory {
                 return new CommandProfilePage(new TariffServiceImpl(new DaoHelperFactory()));
             case "refill":
                 return new CommandRefill(new UserServiceImpl(new DaoHelperFactory()));
-            case "change-name" :
-                return new CommandChangeName(new UserServiceImpl(new DaoHelperFactory()));
+            case "change-personal-data":
+                return new CommandChangePersonalData(new UserServiceImpl(new DaoHelperFactory()));
             case "tariffs-page":
                 return new CommandTariffsPage(new TariffServiceImpl(new DaoHelperFactory()));
             case "admin-main-page":
@@ -41,6 +41,8 @@ public class CommandFactory {
                 return new CommandAdminUsersPage(new UserServiceImpl(new DaoHelperFactory()));
             case "edit-page":
                 return new CommandEditPage();
+            case "buy-tariff":
+                return new CommandBuyTariff(new UserServiceImpl(new DaoHelperFactory()), new TariffServiceImpl(new DaoHelperFactory()));
             default:
                 throw new IllegalArgumentException("Unknown command = " + command);
         }

@@ -27,8 +27,12 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         save(user);
     }
 
-    public void changeName(User user) throws DaoException {
-//        executeUpdate(UPDATE_NAME, "Игорь");
+    public void changePersonalData(User user) throws DaoException {
+        save(user);
+    }
+
+    @Override
+    public void changeUserTariff(User user) throws DaoException {
         save(user);
     }
 

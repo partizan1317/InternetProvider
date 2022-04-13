@@ -37,7 +37,7 @@ public class Controller extends HttpServlet {
             CommandResult result = action.execute(request, response);
             dispatch(request, response, result);
         } catch (Exception e) {
-            request.setAttribute(ERROR_ATTRIBUTE, e.getCause());
+            request.setAttribute(ERROR_ATTRIBUTE, Arrays.toString(e.getStackTrace()));
             dispatch(request, response, CommandResult.forward(ERROR_PAGE_PATH));
         }
     }
