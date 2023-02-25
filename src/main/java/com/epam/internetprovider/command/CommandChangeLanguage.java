@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
-import java.util.Objects;
 
 public class CommandChangeLanguage implements Command {
 
@@ -15,6 +14,16 @@ public class CommandChangeLanguage implements Command {
         String language = request.getParameter("locale");
         HttpSession session = request.getSession();
         session.setAttribute("locale", language);
-        return CommandResult.forward("/login-page.jsp");
+        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+        Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
+        if (isAdmin && isLoggedIn) {
+            return CommandResult.forward("/WEB-INF/pages/main-admin-page.jsp");
+        }
+        else if (!isAdmin && isLoggedIn){
+            return CommandResult.forward("/WEB-INF/pages/main-user-page.jsp");
+        }
+        else {
+            return CommandResult.forward("/login-page.jsp");
+        }
     }
 }

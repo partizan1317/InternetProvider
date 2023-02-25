@@ -178,7 +178,7 @@ main {
     background-color: #672661;
 }
 
-.users__table {
+.tariffs__table {
     position: absolute;
     top: 50px;
     width: 100%;
@@ -187,7 +187,7 @@ main {
     border-spacing: 0;
 }
 
-.unblock {
+.retrieve {
     font-size: 16px;
     border: 0;
     border-radius: 20px;
@@ -199,11 +199,11 @@ main {
     transition: all .2s;
 }
 
-.unblock:hover {
+.retrieve:hover {
     background-color: rgb(35, 120, 35);
 }
 
-.block {
+.delete {
     font-size: 16px;
     border: 0;
     border-radius: 20px;
@@ -215,16 +215,36 @@ main {
     transition: all .2s;
 }
 
-.block:hover {
+.delete:hover {
     background-color: rgb(204, 5, 5);
 }
 
 td,th {
     text-align: center;
-    align-items: center;
 }
 
 span {
     font-size: 32px;
     color: #fff;
+}
+
+.container_nav_btn {
+    position: absolute;
+    bottom: 0;
+    font-size: 16px;
+    margin-left: 200px;
+    margin-bottom: 40px;
+    border: 0;
+    border-radius: 20px;
+    height: 47px;
+    width: 220px;
+    background-color: #F3A9E7;
+    color: white;
+    text-align: center;
+
+    transition: all .2s;
+}
+
+.container_nav_btn:hover {
+    background-color: #F883E5;
 }

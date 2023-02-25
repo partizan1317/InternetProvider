@@ -13,7 +13,12 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     private static final String FIND_BY_LOGIN_AND_PASSWORD = "SELECT * FROM USER WHERE" +
             " LOGIN = ? AND PASSWORD = ?";
-    private static final String UPDATE_NAME = "UPDATE user SET name = ?";
+    private static final String FIND_BY_ID = "SELECT * FROM USER WHERE id = ?";
+    private static final String UPDATE_USER_BALANCE = "UPDATE user SET amount = ? WHERE id = ?";
+    private static final String CHANGE_USER_TARIFF = "UPDATE user SET tariff_id = ? WHERE id = ?";
+    private static final String CHANGE_USER_PERSONAL_DATA = "UPDATE user SET name = ?, surname = ? WHERE id = ?";
+    private static final String CHANGE_USER_BLOCKED_STATUS = "UPDATE user SET is_blocked = ? WHERE id = ?";
+    private static final String REGISTER_USER = "insert into user (name, surname, login, password, is_admin, amount, is_blocked) values(?, ?, ?, ?, false, 0.00, false)";
 
     public UserDaoImpl(Connection connection) {
         super(connection, new UserRowMapper(), User.TABLE);
@@ -23,24 +28,30 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         return executeForSingleResult(FIND_BY_LOGIN_AND_PASSWORD, login, password);
     }
 
-    public void topUpBalance(User user) throws DaoException {
-        save(user);
+    public void topUpBalance(Long id, BigDecimal amount) throws DaoException {
+        executeUpdate(UPDATE_USER_BALANCE, amount, id);
     }
 
-    public void changePersonalData(User user) throws DaoException {
-        save(user);
+    public void changePersonalData(Long id,  String name, String surname) throws DaoException {
+        executeUpdate(CHANGE_USER_PERSONAL_DATA, name, surname, id);
+    }
+
+    public void updateUserBlockedStatus (Long id, Boolean status) throws DaoException {
+        executeUpdate(CHANGE_USER_BLOCKED_STATUS, status, id);
+    }
+
+    public void registerUser (String login, String password, String name, String surname) throws DaoException {
+        executeUpdate(REGISTER_USER, name, surname, login, password);
     }
 
     @Override
-    public void changeUserTariff(User user) throws DaoException {
-        save(user);
+    public void changeUserTariff(Long tariffId, Long userId) throws DaoException {
+        executeUpdate(CHANGE_USER_TARIFF, tariffId, userId);
     }
 
     @Override
-    public Optional<User> getById(Long id) {
-        return Optional.empty();
-        //Specification spec = new FindByIdSpecification(id);
-        //return executeQuery("select * from user where " + spec.toSql(), new UserRowMapper());
+    public Optional<User> getById(Long id) throws DaoException {
+        return executeForSingleResult(FIND_BY_ID, id);
     }
 
     @Override

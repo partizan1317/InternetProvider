@@ -25,20 +25,34 @@ public class CommandBuyTariff implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             User user = (User) request.getSession().getAttribute("user");
-            long tariffId = Long.parseLong(request.getParameter("tariffId"));
+            Long tariffId = Long.parseLong(request.getParameter("tariffId"));
             Optional<Tariff> tariffs = tariffService.getById(tariffId);
+            Long userId = user.getId();
+            CommandResult result;
             if (tariffs.isPresent()) {
                 Tariff tariff = tariffs.get();
                 user.setTariff(tariff);
                 BigDecimal tariffPrice = tariff.getPrice();
                 BigDecimal userAmount = user.getAmount();
-                BigDecimal updatedUserAmount = userAmount.subtract(tariffPrice);
-                user.setAmount(updatedUserAmount);
+                if (userAmount.floatValue() > tariffPrice.floatValue()) {
+                    BigDecimal updatedUserAmount = userAmount.subtract(tariffPrice);
+                    user.setAmount(updatedUserAmount);
+                    userService.topUp(userId, updatedUserAmount);
+                    result = CommandResult.forward("/WEB-INF/pages/tariffs-page.jsp");
+                }
+                else {
+                    request.setAttribute("errorMessage", "Not enough money");
+                    result = CommandResult.forward("/WEB-INF/pages/error-page.jsp");
+                }
             }
-            userService.changeUserTariff(user);
+            else {
+                request.setAttribute("errorMessage", "Selected tariff is not present");
+                result = CommandResult.forward("/WEB-INF/pages/error-page.jsp");
+            }
+            userService.changeUserTariff(tariffId, userId);
             List<Tariff> allTariffs = tariffService.getAll();
             request.setAttribute("tariffs", allTariffs);
-            return CommandResult.forward("/WEB-INF/pages/tariffs-page.jsp");
+            return result;
         }
         catch (Exception e) {
             throw new Exception(e);

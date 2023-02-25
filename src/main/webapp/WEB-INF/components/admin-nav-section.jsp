@@ -18,10 +18,10 @@
         <form method="post" action="controller?command=admin-users-page">
             <button class="nav__btn" type="submit">${users}</button>
         </form>
-        <form method="post" action="controller?command=refill-page">
+        <form method="post" action="controller?command=admin-register-page">
             <button class="nav__btn" type="submit">${register}</button>
         </form>
-        <form method="post" action="controller?command=tariffs-page">
+        <form method="post" action="controller?command=admin-tariffs-page">
             <button class="nav__btn" type="submit">${tariffs}</button>
         </form>
     </div>

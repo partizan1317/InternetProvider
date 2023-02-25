@@ -16,6 +16,7 @@
 <fmt:message bundle="${loc}" key="adminUsersContainer.balance" var="balance"/>
 <fmt:message bundle="${loc}" key="adminUsersContainer.isBlocked" var="isBlock"/>
 <fmt:message bundle="${loc}" key="adminUsersContainer.block" var="block"/>
+<fmt:message bundle="${loc}" key="adminUsersContainer.unblock" var="unblock"/>
 <c:set var="number" value="0" scope="request"/>
 <div class="container">
     <table class="users__table" border="1">
@@ -43,30 +44,45 @@
             </th>
         </tr>
         <c:forEach var="user" items="${requestScope.users}">
-            <tr>
-                <td>
-                    <c:set var="number" value="${number + 1}" scope="request"/>
-                    ${number}
-                </td>
-                <td>
-                    ${user.login}
-                </td>
-                <td>
-                    ${user.name}
-                </td>
-                <td>
-                    ${user.surname}
-                </td>
-                <td>
-                    ${user.amount}
-                </td>
-                <td>
-                    ${user.blocked}
-                </td>
-                <td>
-                    delete
-                </td>
-            </tr>
+            <c:if test="${!user.admin}">
+                <tr>
+                    <td>
+                        <c:set var="number" value="${number + 1}" scope="request"/>
+                        ${number}
+                    </td>
+                    <td>
+                        ${user.login}
+                    </td>
+                    <td>
+                        ${user.name}
+                    </td>
+                    <td>
+                        ${user.surname}
+                    </td>
+                    <td>
+                        ${user.amount}
+                    </td>
+                    <td>
+                        ${user.blocked}
+                    </td>
+                    <c:if test = "${user.blocked}">
+                        <td>
+                            <form method="post" action="controller?command=unblock-user">
+                                <button class="unblock" type="submit" value="">${unblock}</button>
+                                <input type="hidden" name="userId" value="${user.id}">
+                            </form>
+                        </td>
+                    </c:if>
+                    <c:if test = "${!user.blocked}">
+                        <td>
+                            <form method="post" action="controller?command=block-user">
+                                <button class="block" type="submit" value="">${block}</button>
+                                <input type="hidden" name="userId" value="${user.id}">
+                            </form>
+                        </td>
+                    </c:if>
+                </tr>
+            </c:if>
         </c:forEach>
     </table>
 </div>

@@ -6,6 +6,8 @@ import com.epam.internetprovider.entity.User;
 import com.epam.internetprovider.exception.DaoException;
 import com.epam.internetprovider.exception.ServiceException;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +38,17 @@ public class TariffServiceImpl implements TariffService{
             List<Tariff> tariffs = dao.getAll();
             helper.endTransaction();
             return tariffs;
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void updateDeletedStatus (Long id, Boolean status) throws SQLException, IOException, ClassNotFoundException, ServiceException {
+        try (DaoHelper helper = daoHelperFactory.create()) {
+            helper.startTransaction();
+            TariffDao dao = helper.createTariffDao();
+            dao.updateDeletedStatus(id, status);
+            helper.endTransaction();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

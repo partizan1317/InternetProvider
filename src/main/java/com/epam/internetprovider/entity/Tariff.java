@@ -22,7 +22,7 @@ public class Tariff implements Identifiable, Serializable {
     private final Date startDate;
     private final Date endDate;
     private final Boolean isPaid;
-    private final Boolean isDeleted;
+    private Boolean deleted;
     private final BigDecimal price;
 
     public Tariff(Long id, String name, Date startDate, Date endDate, Boolean isPaid, Boolean isDeleted, BigDecimal price) {
@@ -31,7 +31,7 @@ public class Tariff implements Identifiable, Serializable {
         this.startDate = startDate;
         this.endDate = endDate;
         this.isPaid = isPaid;
-        this.isDeleted = isDeleted;
+        this.deleted = isDeleted;
         this.price = price;
     }
 
@@ -39,9 +39,12 @@ public class Tariff implements Identifiable, Serializable {
         return new Tariff(id, null, null, null, false, false, null);
     }
 
-
     public String getName() {
         return name;
+    }
+
+    public void setDeleted (Boolean deleted) {
+        this.deleted = deleted;
     }
 
     public Date getStartDate() {
@@ -56,8 +59,8 @@ public class Tariff implements Identifiable, Serializable {
         return isPaid;
     }
 
-    public Boolean getDeleted() {
-        return isDeleted;
+    public boolean isDeleted() {
+        return deleted;
     }
 
     public BigDecimal getPrice() {
@@ -73,7 +76,7 @@ public class Tariff implements Identifiable, Serializable {
             return false;
         }
         Tariff tariff = (Tariff) o;
-        return Objects.equals(getId(), tariff.getId()) && Objects.equals(getName(), tariff.getName()) && Objects.equals(getStartDate(), tariff.getStartDate()) && Objects.equals(getEndDate(), tariff.getEndDate()) && Objects.equals(isPaid, tariff.isPaid) && Objects.equals(isDeleted, tariff.isDeleted) && Objects.equals(price, tariff.price);
+        return Objects.equals(getId(), tariff.getId()) && Objects.equals(getName(), tariff.getName()) && Objects.equals(getStartDate(), tariff.getStartDate()) && Objects.equals(getEndDate(), tariff.getEndDate()) && Objects.equals(isPaid, tariff.isPaid) && Objects.equals(deleted, tariff.deleted) && Objects.equals(price, tariff.price);
     }
 
     @Override
@@ -83,7 +86,7 @@ public class Tariff implements Identifiable, Serializable {
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + (isPaid ? 1 : 0);
-        result = 31 * result + (isDeleted ? 1 : 0);
+        result = 31 * result + (deleted ? 1 : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;
     }
@@ -101,7 +104,7 @@ public class Tariff implements Identifiable, Serializable {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", isPaid=" + isPaid +
-                ", isDeleted=" + isDeleted +
+                ", isDeleted=" + deleted +
                 ", price= " + price +
                 '}';
     }

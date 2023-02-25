@@ -23,15 +23,12 @@ public class CommandProfilePage implements Command{
             Tariff userTariff = user.getTariff();
             Long tariffId = userTariff.getId();
             Optional<Tariff> tariff = service.getById(tariffId);
-            CommandResult result;
             if (tariff.isPresent()) {
                 request.setAttribute("tariff", tariff.get());
-                result = CommandResult.forward("/WEB-INF/pages/profile-page.jsp");
             } else {
-                request.setAttribute("errorMessage", "Tariff not found");
-                result = CommandResult.forward("/WEB-INF/pages/error-page.jsp");
+                request.setAttribute("tariff", null);
             }
-            return result;
+            return CommandResult.forward("/WEB-INF/pages/profile-page.jsp");
         }
         catch (Exception e) {
             throw new Exception(e);

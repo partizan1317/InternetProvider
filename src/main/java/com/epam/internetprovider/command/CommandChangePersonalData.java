@@ -20,12 +20,19 @@ public class CommandChangePersonalData implements Command {
             User user = (User) request.getSession().getAttribute("user");
             String name = request.getParameter("name");
             String surname = request.getParameter("surname");
+            Long userId = user.getId();
+            CommandResult result;
             if (!name.isEmpty() && !surname.isEmpty()) {
                 user.setName(name);
                 user.setSurname(surname);
-                service.changePersonalData(user);
+                service.changePersonalData(name, surname, userId);
+                result = CommandResult.forward("/WEB-INF/pages/profile-page.jsp");
             }
-            return CommandResult.forward("/WEB-INF/pages/profile-page.jsp");
+            else {
+                request.setAttribute("errorMessage", "Error: fields can not be empty");
+                result = CommandResult.forward("/WEB-INF/pages/error-page.jsp");
+            }
+            return result;
         } catch (Exception e) {
             throw new Exception(e);
         }

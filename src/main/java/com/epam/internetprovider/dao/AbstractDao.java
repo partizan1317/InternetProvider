@@ -5,8 +5,6 @@ import com.epam.internetprovider.entity.User;
 import com.epam.internetprovider.exception.DaoException;
 import com.epam.internetprovider.mapper.RowMapper;
 
-
-import java.io.StringBufferInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,6 +73,7 @@ public abstract class AbstractDao <T extends Identifiable> implements Dao<T>{
         } else {
             return Optional.empty();
         }
+
     }
 
     @Override

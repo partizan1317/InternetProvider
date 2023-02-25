@@ -4,7 +4,6 @@ import com.epam.internetprovider.connection.ConnectionPool;
 import com.epam.internetprovider.connection.ProxyConnection;
 import com.epam.internetprovider.exception.DaoException;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DaoHelper implements AutoCloseable {
@@ -23,9 +22,9 @@ public class DaoHelper implements AutoCloseable {
         return new TariffDaoImpl(connection);
     }
 
-//    public PromotionDao createPromotionDao() {
-//        return new PromotionDaoImpl(connection);
-//    }
+    public PromotionDao createPromotionDao() {
+        return new PromotionDaoImpl(connection);
+    }
 
     @Override
     public void close() {

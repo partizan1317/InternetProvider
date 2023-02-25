@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Controller extends HttpServlet {
 
@@ -37,7 +36,7 @@ public class Controller extends HttpServlet {
             CommandResult result = action.execute(request, response);
             dispatch(request, response, result);
         } catch (Exception e) {
-            request.setAttribute(ERROR_ATTRIBUTE, Arrays.toString(e.getStackTrace()));
+            request.setAttribute(ERROR_ATTRIBUTE, e.getMessage());
             dispatch(request, response, CommandResult.forward(ERROR_PAGE_PATH));
         }
     }

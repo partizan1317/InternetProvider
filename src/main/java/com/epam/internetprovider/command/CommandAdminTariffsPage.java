@@ -7,12 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-/*Test comment*/
-public class CommandTariffsPage implements Command {
+public class CommandAdminTariffsPage implements Command{
 
     private final TariffServiceImpl service;
 
-    public CommandTariffsPage(TariffServiceImpl service) {
+    public CommandAdminTariffsPage(TariffServiceImpl service) {
         this.service = service;
     }
 
@@ -20,6 +19,6 @@ public class CommandTariffsPage implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Tariff> tariffs = service.getAll();
         request.setAttribute("tariffs", tariffs);
-        return CommandResult.forward("/WEB-INF/pages/tariffs-page.jsp");
+        return CommandResult.forward("/WEB-INF/pages/admin-tariffs-page.jsp");
     }
 }
