@@ -1,0 +1,45 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
+<%@ page session="true" %>
+<c:if test = "${empty sessionScope.locale}">
+    <fmt:setLocale value="en"/>
+</c:if>
+<c:if test = "${not empty sessionScope.locale}">
+    <fmt:setLocale value="${sessionScope.locale}"/>
+</c:if>
+<fmt:setBundle basename="locale" var="loc"/>
+<fmt:message bundle="${loc}" key="userContainer.name" var="name"/>
+<fmt:message bundle="${loc}" key="userContainer.surname" var="surname"/>
+<fmt:message bundle="${loc}" key="userContainer.tariff" var="tariff"/>
+<fmt:message bundle="${loc}" key="userContainer.login" var="login"/>
+<fmt:message bundle="${loc}" key="userContainer.btn.edit" var="edit"/>
+<fmt:message bundle="${loc}" key="userContainer.btn.changeTariff" var="changeTariff"/>
+<fmt:message bundle="${loc}" key="userContainer.tariffNotActivated" var="notActivated"/>
+<fmt:message bundle="${loc}" key="containerUser.balance" var="balance"/>
+<div class="container">
+    <img class="img__user" src="${pageContext.request.contextPath}/static/img/user.png" alt="user.png">
+    <div class="info__fields">
+        <span>${login}: ${sessionScope.user.login}</span>
+        <span>${name}: ${sessionScope.user.name}</span>
+        <span>${surname}: ${sessionScope.user.surname}</span>
+        <c:if test = "${not empty requestScope.tariff}">
+            <span>${tariff}: ${requestScope.tariff.name}</span>
+        </c:if>
+        <c:if test = "${empty requestScope.tariff}">
+            <span>${tariff}: ${notActivated}</span>
+        </c:if>
+    </div>
+    <div class="change__btns">
+        <form method="post" action="controller?command=edit-page">
+            <button class="change__btn" type="submit">${edit}</button>
+        </form>
+        <form method="post" action="controller?command=tariffs-page">
+            <button class="change__btn" type="submit">${changeTariff}</button>
+        </form>
+    </div>
+    <div class="balance">
+         ${balance}: ${sessionScope.user.amount}
+    </div>
+</div>

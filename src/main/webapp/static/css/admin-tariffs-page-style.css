@@ -1,0 +1,250 @@
+*,
+*::before
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F6D6F6;
+    font-size:15px;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+
+header {
+    background-color: #CF90D0;
+    min-width: 700px;
+    height: 8vh;
+    width: 100%;
+}
+
+.header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    text-decoration: none;
+    margin-left: 80px;
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff;
+}
+/* Dropdown Language */
+
+.dropbtn {
+    background-color: #CF90D0;
+    color: white;
+    padding: 17px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    text-align: center;
+    display: none;
+    position: absolute;
+    min-width: 51.5px;
+    box-shadow: 0px, 8px, 16px, 0px white;
+    z-index: 1;
+}
+
+.dropdown-content button {
+    border-color: white;
+    background-color: #F3A9E7 ;
+    color: white;
+    padding: 12px, 16px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    transition: background-color .2s linear;
+}
+
+.dropdown-content button:hover {
+    color: white;
+    background-color: #CF90D0;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+
+    background-color: #CF90D0;
+}
+
+/* Nav */
+.nav__header {
+    margin-right: 80px;
+}
+
+.nav__link {
+    padding-top: 12px;
+    display: inline-block;
+    vertical-align: top;
+    color: #fff;
+    text-decoration: none;
+    margin: 0 20px;
+    position: relative;
+    font-size: 16px;
+
+    transition: color .1s linear;
+}
+
+.nav__link::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    opacity: 0;
+    background-color: #fff;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+
+    transition: opacity .1s;
+}
+
+.nav__link:hover {
+    color: #fff;
+
+}
+
+.nav__link:hover::after {
+    opacity: 1;
+}
+
+/* Main */
+
+main {
+    display: flex;
+}
+
+.nav__section {
+    position: relative;
+    height: 92vh;
+    width: 50vh;
+    background-color: #F6D6F6;
+}
+
+.btns {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    position: absolute;
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
+}
+
+.nav__btn {
+    font-size: 16px;
+    margin-bottom: 40px;
+    border: 0;
+    border-radius: 20px;
+    height: 47px;
+    width: 220px;
+    background-color: #F3A9E7;
+    color: white;
+    text-align: center;
+
+    transition: all .2s;
+}
+
+.nav__btn:hover {
+    background-color: #F883E5;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    align-items: center;
+    vertical-align:middle;
+    height: 92vh;
+    width: 165vh;
+    background-color: #672661;
+}
+
+.tariffs__table {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    background-color: white;
+    color: black;
+    border-spacing: 0;
+}
+
+.retrieve {
+    font-size: 16px;
+    border: 0;
+    border-radius: 20px;
+    height: 30px;
+    width: 100px;
+    background-color: rgb(48, 169, 48);
+    color: white;
+    text-align: center;
+    transition: all .2s;
+}
+
+.retrieve:hover {
+    background-color: rgb(35, 120, 35);
+}
+
+.delete {
+    font-size: 16px;
+    border: 0;
+    border-radius: 20px;
+    height: 30px;
+    width: 100px;
+    background-color: red;
+    color: white;
+    text-align: center;
+    transition: all .2s;
+}
+
+.delete:hover {
+    background-color: rgb(204, 5, 5);
+}
+
+td,th {
+    text-align: center;
+}
+
+span {
+    font-size: 32px;
+    color: #fff;
+}
+
+.container_nav_btn {
+    position: absolute;
+    bottom: 0;
+    font-size: 16px;
+    margin-left: 200px;
+    margin-bottom: 40px;
+    border: 0;
+    border-radius: 20px;
+    height: 47px;
+    width: 220px;
+    background-color: #F3A9E7;
+    color: white;
+    text-align: center;
+
+    transition: all .2s;
+}
+
+.container_nav_btn:hover {
+    background-color: #F883E5;
+}
